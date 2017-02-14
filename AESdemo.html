@@ -1,0 +1,40 @@
+<!-- //该方法可与Java进行相互加解密 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>需要秘钥（key）及秘钥偏移量（iv）的aes加解密</title>
+</head>
+<body>
+<script src="aes_1.js"></script>
+<script>
+var key = CryptoJS.enc.Utf8.parse("8IudzhuLuzWfpZGq"); 
+var iv = CryptoJS.enc.Utf8.parse('1234567890123456');
+
+function Encrypt(word){
+	srcs = CryptoJS.enc.Utf8.parse(word);
+	var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+	var demo = encrypted.ciphertext.toString().toUpperCase();
+	demo = CryptoJS.enc.Hex.parse(demo);
+	demo = CryptoJS.enc.Base64.stringify(demo); // 转换64位编码
+	return demo;
+}
+
+function Decrypt(word){
+	var decrypt = CryptoJS.AES.decrypt(word, key, { iv: iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+	var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+	return decryptedStr.toString();
+}
+
+// AES加密
+var mm = Encrypt('uid=143&taskId=1')
+console.log(mm);
+
+// AES解密
+var jm = Decrypt(mm);
+console.log(jm)
+
+
+</script>
+</body>
+</html>
