@@ -1,7 +1,7 @@
-# AES
+# AES-
+aes传输数据加密
 
-AES数据加密方式
-
+AES传输数据加密方式
 1. aes加密需要key和iv,协商秘钥和偏移量
 var key = CryptoJS.enc.Utf8.parse("8IudzhuLuzWfpZGq");
 var iv = CryptoJS.enc.Utf8.parse('1234567890123456');
